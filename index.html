@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MWayDetail demo website for car detailing and auto restoration in Oranmore, County Galway.">
+  <title>MWayDetail | Car Detailing Oranmore</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0d0f;
+      --panel: #121518;
+      --panel-2: #191d20;
+      --text: #f4f6f7;
+      --muted: #a7afb5;
+      --accent: #c6ff00;
+      --line: rgba(255,255,255,.12);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max), 90%);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    h1, h2, h3 {
+      font-family: "Oswald", sans-serif;
+      text-transform: uppercase;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: clamp(62px, 9vw, 126px);
+      line-height: .88;
+      letter-spacing: -2px;
+      margin: 18px 0 26px;
+    }
+
+    h2 {
+      font-size: clamp(44px, 6vw, 72px);
+      line-height: .98;
+      margin: 14px 0 24px;
+    }
+
+    h3 {
+      font-size: 30px;
+      line-height: 1.05;
+    }
+
+    p { margin-top: 0; }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 13px 24px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #10130f;
+      font-weight: 800;
+      font-size: 14px;
+      transition: .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+
+    .button-outline {
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255,255,255,.45);
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255,255,255,.16);
+    }
+
+    .navbar {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .logo {
+      font-family: "Oswald", sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    .logo span { color: var(--accent); }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .nav-cta {
+      padding: 10px 16px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 999px;
+    }
+
+    .hero {
+      min-height: 790px;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(5,7,8,.95) 0%, rgba(5,7,8,.72) 48%, rgba(5,7,8,.2) 100%),
+        url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1900&q=88")
+        center / cover no-repeat;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding-top: 80px;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      max-width: 610px;
+      font-size: 18px;
+      color: #d5d9dc;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    section { padding: 110px 0; }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .intro-image-wrap {
+      position: relative;
+    }
+
+    .intro-image {
+      height: 620px;
+      object-fit: cover;
+    }
+
+    .image-badge {
+      position: absolute;
+      right: -24px;
+      bottom: 30px;
+      width: 155px;
+      height: 155px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #10130f;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-family: "Oswald", sans-serif;
+      text-transform: uppercase;
+      font-weight: 700;
+      line-height: 1.1;
+      padding: 18px;
+    }
+
+    .large-text {
+      font-size: 18px;
+      color: #c7cdd1;
+    }
+
+    .services-section {
+      background: var(--panel);
+    }
+
+    .services-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 40px;
+      margin-bottom: 55px;
+    }
+
+    .services-heading p {
+      max-width: 470px;
+      color: var(--muted);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      padding: 32px;
+      min-height: 260px;
+    }
+
+    .service-number {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 50px;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .feature {
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      min-height: 650px;
+    }
+
+    .feature-image {
+      min-height: 650px;
+      background:
+        url("https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1500&q=88")
+        center / cover no-repeat;
+    }
+
+    .feature-copy {
+      background: var(--accent);
+      color: #111510;
+      padding: 80px;
+      display: flex;
+      align-items: center;
+    }
+
+    .feature-copy .eyebrow { color: #2b3520; }
+
+    .feature-copy p {
+      color: #2f352b;
+      font-size: 17px;
+    }
+
+    .feature-copy .button {
+      background: #111510;
+      color: white;
+    }
+
+    .gallery-heading {
+      max-width: 760px;
+      margin: 0 auto 50px;
+      text-align: center;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+
+    .gallery img {
+      height: 420px;
+      object-fit: cover;
+    }
+
+    .gallery img:nth-child(2) {
+      margin-top: 45px;
+    }
+
+    .visit {
+      background: var(--panel);
+    }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 90px;
+    }
+
+    .phone {
+      font-family: "Oswald", sans-serif;
+      font-size: 38px;
+      margin: 28px 0;
+    }
+
+    .phone a {
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .details {
+      border-top: 1px solid var(--line);
+      margin-top: 30px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .detail-row span { color: var(--muted); }
+
+    .detail-row strong { text-align: right; }
+
+    .cta {
+      text-align: center;
+      background: #eef2f4;
+      color: #111417;
+    }
+
+    .cta .eyebrow { color: #536047; }
+
+    .cta h2 {
+      max-width: 850px;
+      margin: 14px auto 30px;
+    }
+
+    footer {
+      padding: 55px 0 28px;
+      background: #07090a;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 50px;
+      padding-bottom: 38px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .footer-address {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .demo-note {
+      max-width: 800px;
+      padding-top: 22px;
+      color: #747b80;
+      font-size: 11px;
+    }
+
+    @media (max-width: 1024px) {
+      .container { width: min(92%, 920px); }
+
+      section { padding: 88px 0; }
+
+      .hero {
+        min-height: 710px;
+        background-position: 58% center;
+      }
+
+      .intro-grid { gap: 50px; }
+
+      .intro-image { height: 540px; }
+
+      .image-badge {
+        width: 130px;
+        height: 130px;
+        right: -10px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .feature {
+        min-height: 560px;
+      }
+
+      .feature-image { min-height: 560px; }
+
+      .feature-copy { padding: 60px 7%; }
+
+      .gallery img { height: 350px; }
+
+      .visit-grid { gap: 60px; }
+    }
+
+    @media (max-width: 800px) {
+      nav a:not(.nav-cta) { display: none; }
+
+      .navbar { min-height: 72px; }
+
+      .hero {
+        min-height: 650px;
+        background-position: 64% center;
+      }
+
+      h1 {
+        font-size: clamp(56px, 12vw, 82px);
+      }
+
+      h2 {
+        font-size: clamp(42px, 8vw, 60px);
+      }
+
+      .intro-grid,
+      .visit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-image {
+        height: min(68vh, 520px);
+      }
+
+      .image-badge {
+        right: 18px;
+        bottom: 18px;
+      }
+
+      .services-heading {
+        display: block;
+      }
+
+      .feature {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-image { min-height: 420px; }
+
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery img,
+      .gallery img:nth-child(2) {
+        height: 340px;
+        margin-top: 0;
+      }
+
+      .gallery img:last-child {
+        grid-column: 1 / -1;
+        height: 390px;
+      }
+
+      .footer-top { flex-direction: column; }
+    }
+
+    @media (max-width: 600px) {
+      .container { width: 88%; }
+
+      .logo { font-size: 21px; }
+
+      .nav-cta {
+        font-size: 12px;
+        padding: 9px 12px;
+      }
+
+      .hero {
+        min-height: 610px;
+        align-items: flex-end;
+        padding-bottom: 56px;
+        background:
+          linear-gradient(90deg, rgba(5,7,8,.94), rgba(5,7,8,.48)),
+          url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=84")
+          66% center / cover no-repeat;
+      }
+
+      .hero-content { padding-top: 90px; }
+
+      .eyebrow {
+        font-size: 10px;
+        letter-spacing: 2px;
+      }
+
+      h1 {
+        font-size: clamp(46px, 15vw, 64px);
+        line-height: .92;
+        letter-spacing: -1px;
+      }
+
+      h2 {
+        font-size: clamp(38px, 11vw, 50px);
+      }
+
+      .hero p,
+      .large-text {
+        font-size: 16px;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      section { padding: 64px 0; }
+
+      .intro-grid { gap: 34px; }
+
+      .intro-image { height: 410px; }
+
+      .image-badge {
+        width: 112px;
+        height: 112px;
+        font-size: 13px;
+      }
+
+      .services-heading { margin-bottom: 34px; }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card {
+        min-height: 0;
+        padding: 26px;
+      }
+
+      .service-number {
+        margin-bottom: 30px;
+      }
+
+      .service-card h3 {
+        font-size: 27px;
+      }
+
+      .feature-image { min-height: 330px; }
+
+      .feature-copy { padding: 55px 6%; }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery img,
+      .gallery img:nth-child(2),
+      .gallery img:last-child {
+        grid-column: auto;
+        height: 320px;
+        margin-top: 0;
+      }
+
+      .phone {
+        font-size: 30px;
+        overflow-wrap: anywhere;
+      }
+
+      .detail-row {
+        align-items: flex-start;
+      }
+
+      .detail-row span,
+      .detail-row strong {
+        max-width: 50%;
+      }
+
+      .cta .button {
+        width: 100%;
+        max-width: 330px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .logo { font-size: 18px; }
+      h1 { font-size: 42px; }
+      .intro-image { height: 365px; }
+      .phone { font-size: 27px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container navbar">
+    <a class="logo" href="#">MWay<span>Detail</span></a>
+
+    <nav>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="tel:0892283021" class="nav-cta">Call for a Quote</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="eyebrow">Car Detailing · Oranmore</div>
+
+      <h1>
+        Bring back<br>
+        the <span>finish.</span>
+      </h1>
+
+      <p>
+        MWayDetail is a car detailing and auto restoration service in Oranmore,
+        focused on helping vehicles look cleaner, sharper and better cared for.
+      </p>
+
+      <div class="hero-actions">
+        <a href="tel:0892283021" class="button">Call 089 228 3021</a>
+        <a href="#services" class="button button-outline">Explore Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container intro-grid">
+    <div class="intro-image-wrap">
+      <img
+        class="intro-image"
+        src="https://images.unsplash.com/photo-1605515298946-d6642622c056?auto=format&fit=crop&w=1100&q=88"
+        alt="Detailed car exterior"
+      >
+      <div class="image-badge">Detailing<br>&amp; Restoration</div>
+    </div>
+
+    <div>
+      <div class="eyebrow">MWayDetail</div>
+      <h2>Care in every detail.</h2>
+
+      <p class="large-text">
+        From everyday vehicles to cars that need extra attention, a professional
+        detail can completely change how a vehicle looks and feels.
+      </p>
+
+      <p>
+        This demo positions MWayDetail as a focused local detailing service with
+        a strong visual identity, simple service information and an easy way for
+        customers to get in touch for a quote.
+      </p>
+
+      <a href="tel:0892283021" class="button">Request a Quote by Phone</a>
+    </div>
+  </div>
+</section>
+
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="services-heading">
+      <div>
+        <div class="eyebrow">Services</div>
+        <h2>Built around your vehicle.</h2>
+      </div>
+
+      <p>
+        Contact MWayDetail directly for current service options, pricing and
+        recommendations for your vehicle.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-card">
+        <div class="service-number">01 / DETAILING</div>
+        <h3>Exterior Care</h3>
+        <p>
+          A cleaner, sharper exterior with attention paid to the details that
+          make the whole vehicle look better.
+        </p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-number">02 / INTERIOR</div>
+        <h3>Interior Refresh</h3>
+        <p>
+          Give the cabin a reset with a thorough clean designed to improve the
+          overall look and feel inside the vehicle.
+        </p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-number">03 / RESTORATION</div>
+        <h3>Auto Restoration</h3>
+        <p>
+          Speak directly with MWayDetail about restoration work and what may be
+          suitable for your vehicle.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="feature">
+  <div class="feature-image" role="img" aria-label="Vehicle detailing work"></div>
+
+  <div class="feature-copy">
+    <div>
+      <div class="eyebrow">The Difference</div>
+      <h2>Make the finish stand out.</h2>
+
+      <p>
+        Good detailing is about more than a quick clean. It is the smaller
+        touches, careful preparation and attention to finish that transform the
+        overall appearance of a vehicle.
+      </p>
+
+      <a href="tel:0892283021" class="button">Call for a Quote</a>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="container">
+    <div class="gallery-heading">
+      <div class="eyebrow">Detailing Inspiration</div>
+      <h2>Clean. Refined. Finished.</h2>
+      <p class="large-text">
+        Stock imagery is used in this demo and can be replaced with MWayDetail's
+        real before-and-after work for a much stronger finished website.
+      </p>
+    </div>
+
+    <div class="gallery">
+      <img
+        src="https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=950&q=88"
+        alt="Clean detailed car"
+      >
+      <img
+        src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=950&q=88"
+        alt="Vehicle detailing"
+      >
+      <img
+        src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=950&q=88"
+        alt="Polished vehicle"
+      >
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="contact">
+  <div class="container visit-grid">
+    <div>
+      <div class="eyebrow">Contact</div>
+      <h2>Get a quote.</h2>
+
+      <p class="large-text">
+        King's Warehouse<br>
+        Carnmore West<br>
+        Oranmore, Co. Galway<br>
+        H91 HWD8
+      </p>
+
+      <div class="phone">
+        <a href="tel:0892283021">089 228 3021</a>
+      </div>
+
+      <a href="tel:0892283021" class="button">Call MWayDetail</a>
+    </div>
+
+    <div>
+      <div class="eyebrow">Business Details</div>
+
+      <div class="details">
+        <div class="detail-row">
+          <span>Business</span>
+          <strong>MWayDetail</strong>
+        </div>
+
+        <div class="detail-row">
+          <span>Services</span>
+          <strong>Detailing &amp; Auto Restoration</strong>
+        </div>
+
+        <div class="detail-row">
+          <span>Location</span>
+          <strong>Oranmore, Co. Galway</strong>
+        </div>
+
+        <div class="detail-row">
+          <span>Appointments / Pricing</span>
+          <strong>Contact directly</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="eyebrow">Your vehicle deserves the attention</div>
+    <h2>Ready to bring back the finish?</h2>
+    <a href="tel:0892283021" class="button">Call 089 228 3021</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="logo">MWay<span>Detail</span></div>
+
+      <div class="footer-address">
+        King's Warehouse, Carnmore West<br>
+        Oranmore, Co. Galway, H91 HWD8<br>
+        089 228 3021
+      </div>
+    </div>
+
+    <div class="demo-note">
+      DEMO WEBSITE — This website is a design concept and is not the official
+      MWayDetail website. Stock imagery is used for demonstration purposes and
+      should be replaced with photographs supplied or approved by the business
+      before publication. Current services, prices and opening hours should be
+      confirmed directly with the business before launch.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
